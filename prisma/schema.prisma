@@ -1,0 +1,38 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id          Int           @default(autoincrement()) @id
+  username    String        @unique
+  nottodos    Nottodo[]
+  moderations Moderations[]
+}
+
+model Nottodo {
+  id          Int           @default(autoincrement()) @id
+  title       String
+  goal        String
+  startDate   DateTime 
+  endDate     DateTime
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  author      User          @relation(fields: [authorId], references: [id])
+  authorId    Int
+  moderations Moderations[]
+}
+
+model Moderations {
+  id          Int           @default(autoincrement()) @id
+  content     String
+  success     Boolean
+  author      User          @relation(fields: [authorId], references: [id])
+  authorId    Int
+  nottodo     Nottodo       @relation(fields: [nottodoId], references: [id])
+  nottodoId   Int
+}
