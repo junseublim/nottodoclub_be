@@ -17,6 +17,10 @@ export class UsersService {
     return user;
   }
 
+  async getAllUsers() {
+    return await this.prisma.user.findMany();
+  }
+
   private async checkUserNameExist(username: string) {
     const user = await this.prisma.user.findUnique({
       where: {

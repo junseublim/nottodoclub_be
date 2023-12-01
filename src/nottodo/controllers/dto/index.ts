@@ -1,3 +1,2 @@
-export * from './get-nottodo-by-id.dto';
-export * from './get-nottodos-by-user.dto';
-export * from './upsert-nottodo.dto';
+export * from './create-nottodo.dto';
+export * from './update-nottodo.dto';
