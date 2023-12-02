@@ -1,7 +1,6 @@
 import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { CreateNottodoDto, UpdateNottodoDto } from './dto';
-import { Prisma } from '@prisma/client';
-import { NottodoService } from '../services/nottodo.service';
+import { NottodoService } from './nottodo.service';
 
 @Controller('nottodo')
 export class NottodoController {

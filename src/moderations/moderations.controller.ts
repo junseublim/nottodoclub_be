@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { CreateModeration } from './dto';
-import { ModerationsService } from '../services/moderations.service';
-import { NottodoService } from 'src/nottodo/services/nottodo.service';
+import { ModerationsService } from './moderations.service';
+import { NottodoService } from 'src/nottodo/nottodo.service';
 
 @Controller('moderations')
 export class ModerationsController {
@@ -29,6 +29,7 @@ export class ModerationsController {
     const user = await this.nottodoService.getUserByNottodoId({
       id: parseInt(dto.nottodoId),
     });
+
     return this.moderationsService.createModeration({
       content: dto.content,
       success: dto.success,

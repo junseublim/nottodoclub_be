@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
-import { ModerationsController } from './controllers/moderations.controller';
-import { ModerationsService } from './services/moderations.service';
-import { PrismaService } from 'src/libs/prisma.service';
-import { NottodoService } from 'src/nottodo/services/nottodo.service';
+import { ModerationsController } from './moderations.controller';
+import { ModerationsService } from './moderations.service';
+import { NottodoModule } from 'src/nottodo/nottodo.module';
+import { PrismaModule } from 'src/prisma/prisma.module';
 
 @Module({
+  imports: [NottodoModule, PrismaModule],
   controllers: [ModerationsController],
-  providers: [ModerationsService, PrismaService, NottodoService],
+  providers: [ModerationsService],
 })
 export class ModerationsModule {}
