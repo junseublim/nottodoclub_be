@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+  Query,
+} from '@nestjs/common';
 import { CreateNottodoDto, UpdateNottodoDto } from './dto';
 import { NottodoService } from './nottodo.service';
 
@@ -7,21 +16,16 @@ export class NottodoController {
   constructor(private nottodoService: NottodoService) {}
 
   @Get()
-  getNottodosByUser(@Query('userId') userId: string) {
+  getNottodosByUser(@Query('userId', ParseIntPipe) userId) {
     return this.nottodoService.getNottodosByUser({
-      userId: parseInt(userId),
+      userId,
     });
   }
 
-  @Get('all')
-  getAllNottodos() {
-    return this.nottodoService.getAllNottodos();
-  }
-
   @Get(':id')
-  getNottodoById(@Param('id') id: string) {
+  getNottodoById(@Param('id', ParseIntPipe) id) {
     return this.nottodoService.getNottodoById({
-      id: parseInt(id),
+      id,
     });
   }
 
