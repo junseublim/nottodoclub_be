@@ -35,4 +35,5 @@ model Moderations {
   userId      Int
   nottodo     Nottodo       @relation(fields: [nottodoId], references: [id])
   nottodoId   Int
+  date        DateTime      @default(now())
 }

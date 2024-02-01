@@ -7,29 +7,57 @@ async function main() {
     create: {
       username: 'jun',
       nottodos: {
-        create: {
-          title: 'Check out Prisma with Nest.js',
-          goal: 'Nest.js 공부',
-          startDate: new Date("2023/01/26"),
-          endDate: new Date("2023/05/19")
+        createMany: {
+          data: [
+            {
+              title: 'Check out Prisma with Nest.js',
+              goal: 'Nest.js 공부',
+              startDate: new Date("2023/01/26"),
+              endDate: new Date("2023/05/19")
+            },
+            {
+              title: 'Typescript Documents',
+              goal: 'Typescript 공부',
+              startDate: new Date("2023/01/26"),
+              endDate: new Date("2023/05/10")
+            }
+          ]
         }
       }
     }
   })
 
-  const nottodo = await prisma.nottodo.findFirst({
-    where: {
-      userId: jun.id
-    }
-  })
-
-  const moderation = await prisma.moderations.create({
-    data: {
-      content: 'Nest.js 책 읽기',
-      success: true,
-      userId: jun.id,
-      nottodoId: nottodo.id
-    }
+  const moderation = await prisma.moderations.createMany({
+    data: [
+      {
+        content: 'Nest.js 책 읽기1',
+        success: true,
+        userId: jun.id,
+        nottodoId: 1,
+        date: new Date()
+      },
+      {
+        content: 'Nest.js 책 읽기2',
+        success: false,
+        userId: jun.id,
+        nottodoId: 1,
+        date: new Date()
+      },
+      {
+        content: 'Typescript 책 읽기1',
+        success: true,
+        userId: jun.id,
+        nottodoId: 2,
+        date: new Date()
+      },
+      {
+        content: 'Typescript 책 읽기2',
+        success: false,
+        userId: jun.id,
+        nottodoId: 2,
+        date: new Date()
+      }
+    ]
   })
 }
 main()
